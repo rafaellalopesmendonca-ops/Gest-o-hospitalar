@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Central | Consultas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="consultas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo"><i class="fas fa-hospital-symbol"></i> Hospital Central</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-chart-line"></i> Painel</a></li>
+                <li><a href="#"><i class="fas fa-user-injured"></i> Pacientes</a></li>
+                <li><a href="consultas.html" class="active"><i class="fas fa-calendar-alt"></i> Consultas</a></li>
+                <li><button id="chkDarkMode" class="btn-dark-mode"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="mini-banner">
+        <div class="mini-banner-content">
+            <h1><i class="fas fa-calendar-check"></i> Consultas</h1>
+            <p>Gerencie a agenda dos especialistas ativos.</p>
+        </div>
+    </header>
+
+    <main class="container secao-consultas">
+        
+        <div id="lista-medicos" class="cards-consultas">
+            
+            <div class="card-medico">
+                <div class="medico-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Médico">
+                    <div class="medico-nome-area">
+                        <h3>Dr. Ricardo Oliveira</h3>
+                        <span class="especialidade-tag">Cardiologia</span>
+                    </div>
+                </div>
+                <div class="medico-detalhes">
+                    <p><i class="fas fa-door-open"></i> Sala 04 - Ala Norte</p>
+                    <p><i class="fas fa-clock"></i> 08:00 às 17:00</p>
+                </div>
+                <div class="footer-card">
+                    <span class="status-vagas disponivel">3 vagas hoje</span>
+                    <button class="btn-agendar" onclick="abrirAgendamento('Dr. Ricardo', 'Cardiologia')">Agendar</button>
+                </div>
+            </div>
+
+            <div class="card-medico">
+                <div class="medico-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/607/607414.png" alt="Médica">
+                    <div class="medico-nome-area">
+                        <h3>Dra. Juliana Costa</h3>
+                        <span class="especialidade-tag">Clínica Geral</span>
+                    </div>
+                </div>
+                <div class="medico-detalhes">
+                    <p><i class="fas fa-door-open"></i> Sala 12 - Recepção 2</p>
+                    <p><i class="fas fa-clock"></i> 10:00 às 19:00</p>
+                </div>
+                <div class="footer-card">
+                    <span class="status-vagas cheio">Agenda Lotada</span>
+                    <button class="btn-agendar" style="background-color: #64748b;">Lista Espera</button>
+                </div>
+            </div>
+
+            </div>

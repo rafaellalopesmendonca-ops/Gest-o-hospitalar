@@ -322,3 +322,115 @@ select {
     color: #3b82f6;
     transition: 0.3s;
 }
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 50%;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#detalhesPaciente p {
+    margin: 15px 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.cards-consultas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-medico {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+
+.card-medico:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.medico-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.medico-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f1f5f9;
+}
+
+.medico-info h4 { margin: 0; color: #1e293b; }
+.medico-info p { margin: 0; font-size: 13px; color: #64748b; }
+
+.status-agenda {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+.vagas { color: #16a34a; font-weight: bold; font-size: 12px; }
+.lotado { color: #dc2626; font-weight: bold; font-size: 12px; }
+
+.botao-agendar { background: #3b82f6; color: white; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+.botao-lista-espera { background: #f1f5f9; color: #64748b; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+
+.progress-bar-container {
+    width: 100%;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    height: 12px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Vai aumentar via JS */
+    background: linear-gradient(90deg, #3b82f6, #ef4444);
+    transition: width 0.5s ease-in-out;
+}
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: -200px;
+    background: #1e293b;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.5s ease;
+    z-index: 3000;
+    border-left: 5px solid #3b82f6;
+}
+

@@ -118,3 +118,49 @@ function atualizarRelogio() {
 
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
+
+function abrirProntuario(nome, cpf, tel, conv, prio, sint, hist) {
+    const detalhes = document.getElementById("detalhesPaciente");
+    detalhes.innerHTML = `
+        <p><strong>Nome:</strong> ${nome}</p>
+        <p><strong>CPF:</strong> ${cpf} | <strong>Telefone:</strong> ${tel}</p>
+        <p><strong>Convênio:</strong> ${conv}</p>
+        <p><strong>Urgência:</strong> ${prio}</p>
+        <p><strong>Sintomas Atuais:</strong> ${sint}</p>
+        <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <strong>Histórico Médico:</strong><br>
+            ${hist || 'Nenhum histórico registrado.'}
+        </div>
+    `;
+    document.getElementById("modalPaciente").style.display = "block";
+}
+
+function fecharModal() {
+    document.getElementById("modalPaciente").style.display = "none";
+}
+
+function mostrarNotificacao(mensagem, tipo = 'sucesso') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${tipo}`;
+    toast.innerHTML = `<i class="fas fa-info-circle"></i> ${mensagem}`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.right = '20px';
+    }, 100);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+document.getElementById('inputBusca').addEventListener('keyup', function() {
+    let busca = this.value.toLowerCase();
+    let linhas = document.querySelectorAll('#tabelaPacientes tr');
+
+    linhas.forEach(linha => {
+        let textoLinha = linha.innerText.toLowerCase();
+        linha.style.display = textoLinha.includes(busca) ? '' : 'none';
+    });
+});

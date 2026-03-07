@@ -14,8 +14,13 @@
     <ul class="nav-links">
         <li><a href="#"><i class="fas fa-chart-line"></i> Painel</a></li>
         <li><a href="#"><i class="fas fa-user-injured"></i> Pacientes</a></li>
-        <li><a href="#"><i class="fas fa-calendar-check"></i> Consultas</a></li>
+        <li><a href="consultas.html"><i class="fas fa-calendar-check"></i> Consultas</a></li>
         <li class="relogio-container"><i class="far fa-clock"></i> <span id="relogio">00:00:00</span></li>
+        <li>
+    <button id="chkDarkMode" class="btn-dark-mode">
+        <i class="fas fa-moon"></i>
+    </button>
+</li>
     </ul>
 </nav> 
 
@@ -25,7 +30,14 @@
 </header>
 
 <main>
-    <section class="dashboard">
+    <div class="card-info" style="grid-column: span 3;">
+    <p>Ocupação do Hospital</p>
+    <div class="progress-bar-container">
+        <div id="bar-preenchimento" class="progress-bar"></div>
+    </div>
+    <small id="status-ocupacao">0% da capacidade utilizada</small>
+</div>
+        <section class="dashboard">
         <div class="card-info">
             <i class="fas fa-users"></i>
             <div>
@@ -52,6 +64,7 @@
     <section class="container">
         <h2><i class="fas fa-user-plus"></i> Novo Cadastro</h2>
         <form id="formPaciente">
+            <textarea id="historico" placeholder="Histórico Médico (Alergias, medicamentos contínuos, cirurgias prévias...)" rows="3" style="grid-column: span 2;"></textarea>
             <input type="text" id="nome" placeholder="Nome completo" required>
             <input type="text" id="cpf" placeholder="CPF (000.000.000-00)" required>
             <input type="text" id="telefone" placeholder="Telefone de contato">
@@ -85,6 +98,42 @@
                 </div>
             </div>
         </div>
+
+        <section id="agenda-consultas" class="tabela-section">
+    <div class="header-lista">
+        <h2><i class="fas fa-calendar-alt"></i> Agenda de Especialidades (Hoje)</h2>
+    </div>
+    
+    <div class="cards-consultas">
+        <div class="card-medico">
+            <div class="medico-info">
+                <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Médico">
+                <div>
+                    <h4>Dr. Ricardo Oliveira</h4>
+                    <p>Cardiologia - Sala 04</p>
+                </div>
+            </div>
+            <div class="status-agenda">
+                <span class="vagas">3 vagas restantes</span>
+                <button class="botao-agendar">Agendar</button>
+            </div>
+        </div>
+
+        <div class="card-medico">
+            <div class="medico-info">
+                <img src="https://cdn-icons-png.flaticon.com/512/607/607414.png" alt="Médica">
+                <div>
+                    <h4>Dra. Juliana Costa</h4>
+                    <p>Clínica Geral - Sala 12</p>
+                </div>
+            </div>
+            <div class="status-agenda">
+                <span class="lotado">Agenda Lotada</span>
+                <button class="botao-lista-espera">Lista de Espera</button>
+            </div>
+        </div>
+    </div>
+</section>
         
         <div class="tabela-container">
             <table>
@@ -103,6 +152,16 @@
     </section>
 
 </main>
+<div id="modalPaciente" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="fecharModal()">&times;</span>
+        <h2><i class="fas fa-file-medical"></i> Prontuário do Paciente</h2>
+        <hr>
+        <div id="detalhesPaciente">
+            </div>
+        <button onclick="window.print()" class="botao"><i class="fas fa-print"></i> Imprimir Prontuário</button>
+    </div>
+</div>
 
 <script src="script.js"></script> 
 </body>
