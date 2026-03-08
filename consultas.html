@@ -10,17 +10,30 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo"><i class="fas fa-hospital-symbol"></i> Hospital Central</div>
-            <ul class="nav-links">
-                <li><a href="index.html"><i class="fas fa-chart-line"></i> Painel</a></li>
-                <li><a href="#"><i class="fas fa-user-injured"></i> Pacientes</a></li>
-                <li><a href="consultas.html" class="active"><i class="fas fa-calendar-alt"></i> Consultas</a></li>
-                <li><button id="chkDarkMode" class="btn-dark-mode"><i class="fas fa-moon"></i></button></li>
-            </ul>
+    
+
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-hospital-symbol"></i> 
+            <span>Hospital Central</span>
         </div>
-    </nav>
+
+        <nav class="menu">
+            <a href="index.html"><i class="fas fa-chart-line"></i> Painel</a>
+            <a href="pacientes.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+            <a href="consultas.html" class="active"><i class="fas fa-calendar-alt"></i> Consultas</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="clock">
+                <i class="fa-regular fa-clock"></i>
+                <span id="time">00:00:00</span>
+            </div>
+            <button class="btn-theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
     <header class="mini-banner">
         <div class="mini-banner-content">
@@ -30,7 +43,6 @@
     </header>
 
     <main class="container secao-consultas">
-        
         <div id="lista-medicos" class="cards-consultas">
             
             <div class="card-medico">
@@ -47,9 +59,55 @@
                 </div>
                 <div class="footer-card">
                     <span class="status-vagas disponivel">3 vagas hoje</span>
-                    <button class="btn-agendar" onclick="abrirAgendamento('Dr. Ricardo', 'Cardiologia')">Agendar</button>
+                    <button class="btn-agendar">Agendar</button>
                 </div>
             </div>
+
+           <div class="topo-consultas">
+    <div class="busca-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="buscaMedico" placeholder="Buscar especialista...">
+    </div>
+    <button class="btn-novo" onclick="abrirModal()">
+        <i class="fas fa-plus"></i> Novo Médico
+    </button>
+</div>
+
+<div id="modalMedico" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="fecharModal()">&times;</span>
+        <h2><i class="fas fa-user-md"></i> Cadastrar Especialista</h2>
+        <form id="formNovoMedico">
+            <input type="text" id="nomeMed" placeholder="Nome do Médico" required>
+            <input type="text" id="especialidadeMed" placeholder="Especialidade" required>
+            <input type="text" id="salaMed" placeholder="Sala e Ala" required>
+            <input type="text" id="horarioMed" placeholder="Horário (ex: 08:00 às 17:00)" required>
+            <input type="number" id="limiteMed" placeholder="Limite máximo de vagas" min="1" required> 
+            <button type="submit" class="btn-salvar">Salvar Médico</button>
+        </form>
+    </div>
+</div>
+
+    <div id="lista-medicos" class="cards-consultas">
+        <div class="card-medico">
+            </div>
+    </div>
+
+    <div id="areaFormMedico" class="modal-form" style="display: none;">
+        <h2 class="titulo-form">Cadastrar Novo Especialista</h2>
+        <form class="form-medico">
+            <input type="text" placeholder="Nome completo do médico" required>
+            <input type="text" placeholder="Especialidade" required>
+            <input type="text" placeholder="Sala / Ala" required>
+            
+            <div class="form-horario">
+                <input type="time" placeholder="Início"> às <input type="time" placeholder="Fim">
+            </div>
+
+            <button type="submit" class="btn-cadastrar-medico">Cadastrar Médico</button>
+            <button type="button" class="btn-cancelar" onclick="fecharFormularioMedico()">Cancelar</button>
+        </form>
+    </div>
 
             <div class="card-medico">
                 <div class="medico-header">
@@ -69,4 +127,30 @@
                 </div>
             </div>
 
-            </div>
+        </div>
+    </main>
+
+    <div id="modalAgendamento" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="fecharModalAgendamento()">&times;</span>
+        <h2><i class="fas fa-calendar-plus"></i> Agendar Paciente</h2>
+        <form id="formAgendarPaciente">
+            <input type="text" id="agendaNome" placeholder="Nome do Paciente" required>
+            <input type="text" id="agendaCPF" placeholder="CPF" required>
+            <input type="text" id="agendaTelefone" placeholder="Telefone" required>
+            <select id="agendaConvenio">
+                <option value="Particular">Particular</option>
+                <option value="Convênio">Convênio</option>
+            </select>
+            <button type="submit" class="btn-salvar">Confirmar e Ir para Pacientes</button>
+        </form>
+    </div>
+</div>
+
+   <script src="script.js"></script>
+    <script src="consultas.js"></script>
+
+
+</body>
+
+</html>

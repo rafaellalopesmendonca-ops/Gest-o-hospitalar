@@ -1,166 +1,30 @@
-const form = document.getElementById("formPaciente");
-const lista = document.getElementById("listaPacientes");
-const cpfInput = document.getElementById("cpf");
-const telInput = document.getElementById("telefone");
-const buscaInput = document.getElementById("busca");
 
-function salvarDados() {
-    localStorage.setItem("pacientes", lista.innerHTML);
-    atualizarContador();
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-function atualizarContador() {
-    const total = lista.getElementsByTagName("tr").length;
-    const elementoContador = document.getElementById("totalPacientes");
-    if (elementoContador) {
-        elementoContador.innerText = total;
+    function atualizarRelogio() {
+        const agora = new Date();
+        const display = agora.toLocaleTimeString('pt-BR', { hour12: false });
+        const elementoRelogio = document.getElementById("relogio") || document.getElementById("time");
+        if (elementoRelogio) elementoRelogio.textContent = display;
     }
-}
+    setInterval(atualizarRelogio, 1000);
+    atualizarRelogio();
 
-function adicionarLinha(nome, cpf, telefone, convenio, prioridade) {
-    const linha = document.createElement("tr");
-    
-    let classePrioridade = "";
-    if (prioridade === "Emergência") classePrioridade = "prioridade-emergencia";
-    else if (prioridade === "Urgente") classePrioridade = "prioridade-urgente";
-    else classePrioridade = "prioridade-eletivo";
+    const btnTheme = document.querySelector('.btn-theme');
+    const body = document.body;
 
-    linha.innerHTML = `
-        <td><strong>${nome}</strong></td>
-        <td>${cpf}</td>
-        <td>${telefone}</td>
-        <td><span class="badge-convenio">${convenio || 'Particular'}</span></td>
-        <td><span class="badge-prioridade ${classePrioridade}">${prioridade}</span></td>
-        <td>
-            <button class="excluir" onclick="removerPaciente(this)">
-                <i class="fas fa-trash-alt"></i> Excluir
-            </button>
-        </td>
-    `;
-    lista.appendChild(linha);
-}
-
-function removerPaciente(botao) {
-    if (confirm("Deseja realmente excluir este paciente?")) { 
-        botao.closest("tr").remove();
-        salvarDados(); 
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add('dark-mode');
     }
-}
 
-form.onsubmit = function(e) {
-    e.preventDefault();
-
-    const nome = document.getElementById("nome").value;
-    const cpf = document.getElementById("cpf").value;
-    const telefone = telInput.value;
-    const convenio = document.getElementById("convenio").value;
-    const prioridade = document.getElementById("prioridade").value;
-
-    adicionarLinha(nome, cpf, telefone, convenio, prioridade);
-    salvarDados();
-    form.reset();
-    
-    return false;
-};
-
-cpfInput.oninput = function() {
-    let valor = cpfInput.value.replace(/\D/g, ""); 
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    cpfInput.value = valor;
-};
-
-telInput.oninput = function() {
-    let v = telInput.value.replace(/\D/g, ""); 
-    v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); 
-    v = v.replace(/(\d{5})(\d)/, "$1-$2");     
-    telInput.value = v.substring(0, 15);       
-};
-
-buscaInput.oninput = function() {
-    const termo = buscaInput.value.toLowerCase();
-    const linhas = lista.getElementsByTagName("tr");
-
-    Array.from(linhas).forEach(linha => {
-        const textoNome = linha.cells[0].textContent.toLowerCase();
-        const textoCPF = linha.cells[1].textContent.toLowerCase();
-        
-        if (textoNome.includes(termo) || textoCPF.includes(termo)) {
-            linha.style.display = "";
-        } else {
-            linha.style.display = "none";
-        }
-    });
-};
-
-window.onload = function() {
-    const dados = localStorage.getItem("pacientes");
-    if (dados) {
-        lista.innerHTML = dados;
+    if (btnTheme) {
+        btnTheme.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
     }
-    atualizarContador();
-};
-
-function imprimirRelatorio() {
-    window.print();
-}
-
-function atualizarRelogio() {
-    const agora = new Date();
-    const horas = String(agora.getHours()).padStart(2, '0');
-    const minutos = String(agora.getMinutes()).padStart(2, '0');
-    const segundos = String(agora.getSeconds()).padStart(2, '0');
-    
-    const display = `${horas}:${minutos}:${segundos}`;
-    document.getElementById("relogio").textContent = display;
-}
-
-setInterval(atualizarRelogio, 1000);
-atualizarRelogio();
-
-function abrirProntuario(nome, cpf, tel, conv, prio, sint, hist) {
-    const detalhes = document.getElementById("detalhesPaciente");
-    detalhes.innerHTML = `
-        <p><strong>Nome:</strong> ${nome}</p>
-        <p><strong>CPF:</strong> ${cpf} | <strong>Telefone:</strong> ${tel}</p>
-        <p><strong>Convênio:</strong> ${conv}</p>
-        <p><strong>Urgência:</strong> ${prio}</p>
-        <p><strong>Sintomas Atuais:</strong> ${sint}</p>
-        <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px;">
-            <strong>Histórico Médico:</strong><br>
-            ${hist || 'Nenhum histórico registrado.'}
-        </div>
-    `;
-    document.getElementById("modalPaciente").style.display = "block";
-}
-
-function fecharModal() {
-    document.getElementById("modalPaciente").style.display = "none";
-}
-
-function mostrarNotificacao(mensagem, tipo = 'sucesso') {
-    const toast = document.createElement('div');
-    toast.className = `toast ${tipo}`;
-    toast.innerHTML = `<i class="fas fa-info-circle"></i> ${mensagem}`;
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.opacity = '1';
-        toast.style.right = '20px';
-    }, 100);
-
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 500);
-    }, 3000);
-}
-document.getElementById('inputBusca').addEventListener('keyup', function() {
-    let busca = this.value.toLowerCase();
-    let linhas = document.querySelectorAll('#tabelaPacientes tr');
-
-    linhas.forEach(linha => {
-        let textoLinha = linha.innerText.toLowerCase();
-        linha.style.display = textoLinha.includes(busca) ? '' : 'none';
-    });
 });

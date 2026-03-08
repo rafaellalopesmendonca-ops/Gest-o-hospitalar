@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pacientes | Hospital Central</title>
+    <link rel="stylesheet" href="pacientes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-circle-h"></i>
+            <span>Hospital Central</span>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html"><i class="fa-solid fa-chart-line"></i> Painel</a>
+            <a href="pacientes.html"><i class="fa-solid fa-user"></i> Pacientes</a>
+            <a href="consultas.html"><i class="fa-solid fa-calendar-check"></i> Consultas</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="clock">
+                <i class="fa-regular fa-clock"></i>
+                <span id="time">00:00:00</span>
+            </div>
+            <button class="btn-theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="container">
+        <h1>Gestão de Pacientes</h1>
+        <p>Gerencie todos os pacientes cadastrados no sistema.</p>
+
+        <div class="topo-pacientes">
+            <input type="text" id="inputBusca" placeholder="Buscar paciente por nome ou CPF">
+            <button class="btn-novo">
+                <i class="fa-solid fa-user-plus"></i> Novo Paciente
+            </button>
+        </div>
+
+        <table class="tabela-pacientes">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Convênio</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <h2 class="titulo-form">Novo Paciente</h2>
+        <form class="form-paciente">
+            <input type="text" id="nome" placeholder="Nome completo" required>
+            <input type="text" id="cpf" placeholder="CPF" required>
+            <input type="text" id="telefone" placeholder="Telefone" required>
+            <input type="text" id="convenio" placeholder="Convênio">
+            <select id="status">
+                <option value="">Status</option>
+                <option value="Internado">Internado</option>
+                <option value="Consulta">Consulta</option>
+                <option value="Alta">Alta</option>
+            </select>
+            <textarea id="historico" placeholder="Histórico Médico"></textarea>
+            <button type="submit" class="btn-cadastrar">Cadastrar Paciente</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="pacientes.js"></script>
+</body>
+
+</html>
